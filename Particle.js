@@ -1,25 +1,30 @@
-class Particle{
+class Particle {
+    constructor(x, y,r) {
 
-constructor(x,y,radius){
+        var options ={
+            restitution:0.4
+        }
+        this.r=r;
+      
+        this.body = Bodies.circle(x, y, this.r,options);       
+        this.color=color(random(0, 255), random(0, 255), random(0, 255));
+        World.add(world, this.body);
 
-var options = {
-restitution: 0.5,
-}
+    }
+    display() {
 
-this.body = Bodies.circle(x,y,radius,options);
-this.color=color(random(0, 255), random(0, 255), random(0, 255));
-this.radius = radius;
-World.add(world, this.body);
-}
+        var pos = this.body.position;
+        var angle = this.body.angle;
 
-display(){
-var pos = this.body.position;
-push();
-colorMode(HSB);
-noStroke();
-translate(pos.x,pos.y);
-fill(this.color);
-ellipse(0,0,this.radius*2);
-pop();
-}
-}
+        push();
+        translate(pos.x, pos.y);
+        rotate(angle);
+        //imageMode(CENTER);
+        noStroke();
+        fill(this.color)
+        ellipseMode(RADIUS);
+        ellipse(0, 0, this.r,this.r);
+        pop();
+    }
+
+};
